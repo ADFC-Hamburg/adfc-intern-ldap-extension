@@ -2,4 +2,5 @@ debian/files
 debian/adfc-intern/
 debian/*.debhelper.log
 debian/*.substvars
+debian/*.debhelper
 debian/.debhelper

@@ -1,0 +1,19 @@
+name: Simple CI
+
+on: [push]
+
+jobs:
+  run-ci:
+    name: Build Debian Package
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Apt install debhelper and devscripts
+      run: "sudo apt install debhelper devscripts"
+    - name: dpkg-buildpackage
+      run: "dpkg-buildpackage --no-sign --build=binary -rfakeroot"
+    - name: Upload Debian Package
+      uses: actions/upload-artifact@v2
+      with:
+        name: Debian Package
+        path: /home/runner/work/adfc-intern-ldap-extension/adfc-intern*.deb

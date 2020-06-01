@@ -1,0 +1,28 @@
+#! /bin/bash
+#
+#  join script
+#
+## joinscript api: bindpwdfile
+
+VERSION=1
+
+# Einbinden der Bilbiotheksfunktionen
+. /usr/share/univention-lib/ldap.sh
+. /usr/share/univention-join/joinscripthelper.lib
+
+main () {
+    joinscript_init
+        eval "$(univention-config-registry shell)"
+        export UNIVENTION_APP_IDENTIFIER='adfc-intern-schema'
+        local PREFIX='/usr/share/adfc-intern'
+
+        ucs_registerLDAPExtension "$@" --schema "$PREFIX"/adfc-intern.schema \
+     || die "Failed to register 'adfc-intern' LDAP extensions"
+
+    joinscript_save_current_version
+}
+
+
+
+main "$@"
+exit $?

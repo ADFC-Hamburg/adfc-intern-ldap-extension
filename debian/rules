@@ -1,0 +1,12 @@
+#!/usr/bin/make -f
+# -*- makefile -*-
+#
+
+PACKAGE_NAME = adfc-intern
+D := debian/${PACKAGE_NAME}
+
+#override_dh_auto_test:
+#	ucslint
+
+%:
+	dh $@ --with python2

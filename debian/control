@@ -1,0 +1,20 @@
+Source: adfc-intern
+Section: digitec
+Priority: optional
+Maintainer: Sven Anders <adfc-intern2020@sven.anders-hamburg>
+Build-Depends: debhelper (>= 7.0.50~),
+ univention-config-dev,
+ univention-management-console-dev,
+ ucslint-univention,
+ dh-python,
+Standards-Version: 3.7.2
+
+Package: adfc-intern
+Architecture: all
+Depends: univention-config,
+ univention-directory-manager-tools,
+ shell-univention-lib (>> 1.0.1-1),
+ ${misc:Depends},
+ ${python:Depends}
+Description: Univention Directory Manager module to add Landesverband und Untergliederung
+

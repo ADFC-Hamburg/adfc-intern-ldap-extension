@@ -1,0 +1,2 @@
+join_scripts/37adfc-intern.inst usr/lib/univention-install/
+schema/adfc-intern.schema usr/share/adfc-intern/schema/

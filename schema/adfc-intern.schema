@@ -21,4 +21,4 @@ objectclass     ( 1.3.6.1.4.1.45819.10.100 NAME 'adfcIntern'
         DESC 'ADFC-Intern Schema Erweiterung'
         SUP top AUXILIARY
         MUST ( uid )
-        MAY ( adfcLandesverband $ adfcLVUntergliederung)
+        MAY ( adfcLandesverband $ adfcLVUntergliederung))

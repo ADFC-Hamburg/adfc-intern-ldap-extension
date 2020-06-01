@@ -8,5 +8,8 @@ D := debian/${PACKAGE_NAME}
 #override_dh_auto_test:
 #	ucslint
 
+override_dh_fixperms:
+	dh_fixperms
+	chmod 755 ${D}/usr/lib/univention-install/*.inst
 %:
 	dh $@ --with python2

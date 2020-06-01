@@ -4,7 +4,7 @@
 #
 ## joinscript api: bindpwdfile
 
-VERSION=1
+VERSION=2
 
 # Einbinden der Bilbiotheksfunktionen
 . /usr/share/univention-lib/ldap.sh
@@ -16,8 +16,25 @@ main () {
         export UNIVENTION_APP_IDENTIFIER='adfc-intern-schema'
         local PREFIX='/usr/share/adfc-intern'
 
-        ucs_registerLDAPExtension "$@" --schema "$PREFIX"/adfc-intern.schema \
+        ucs_registerLDAPExtension "$@" --schema "$PREFIX"/schema/adfc-intern.schema \
      || die "Failed to register 'adfc-intern' LDAP extensions"
+
+    BASEDN=$(ucr get ldap/base)
+
+    udm settings/extended_attribute create --position "cn=custom attributes,cn=univention,$BASEDN"  \
+      --set name=adfcLandesverband --set module="users/user" --set tabName="ADFC" \
+      --set tabPosition=1 --set shortDescription=Landesverband \
+      --set longDescription="ADFC Landesverband" \
+      --set objectClass=adfcIntern \
+      --set ldapMapping=adfcLandesverband --set syntax=string --set mayChange=1 \
+
+    udm settings/extended_attribute create --position "cn=custom attributes,cn=univention,$BASEDN" \
+     --set name=adfcLVUntergliederung --set module="users/user" --set tabName="ADFC" \
+     --set tabPosition=2 --set shortDescription="Untergliederung (freiwilig)" \
+     --set longDescription="ADFC Untergliederung Bezirk/Kreisverband etc. (freiwilig)" \
+     --set objectClass=adfcIntern \
+     --set ldapMapping=adfcLVUntergliederung --set syntax=string --set mayChange=1
+
 
     joinscript_save_current_version
 }
